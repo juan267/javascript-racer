@@ -1,36 +1,21 @@
-# Javascript Racer 1 Front End
+# Carreras de Javascript
 
-## Learning Competencies
+## Resumen
 
-* Define [jQuery][] callback events
-* Change the DOM based on events
-* Write custom event handlers in JavaScript and jQuery
-* Build a pure JavaScript application 
-* Write OO-JavaScript
+En este proyecto vamos a construir un pequeño juego de javascript. Van a existir dos jugadores, y ellos van a competir corriendo sus carros hasta la meta.
 
-## Summary
+Cada jugador avanzara su carro al undir repetidamente alguna tecla del teclado. Por ejemplo el jugador 1 puede avanzar su carro al undir la tecla 'q' mientras que el jugador 2 lo hace al undir la teclas 'p'.
 
-Let's create a JavaScript-only version of [Ruby Racer][].  For now it will be a
-single html page with no back-end at all.  Later we'll add the ability to save
-high scores and the like by adding a back-end to the application.
+Para este reto va ser muy importante saber como manejar los eventos que genera el nevegador por medio del uso de [jQuery][].
 
-Unlike Ruby Racer, the outcome of the game won't be pure chance.  Each player
-will advance their "car" by smashing some key.  For example, player 1 might be
-the "q" key and player 2 might be the "p" key.
+## Pasos
 
-The goal here is to learn more about JavaScript, jQuery, the DOM, and
-asynchronous event handling.
 
-Before you start, you should read about [jQuery][].  In particular, you should
-understand event handling and callback functions.
+### Paso 0: Crea los archivos
 
-## Releases
+En este reto no te vamos a dar ningun tipo de archivo para empezar, tendras que escribir todos los archivos de HTML, CSS y JavaScript que necesites y juntarlos.
 
-### Release 0: The Setup
-
-There is no skeleton for this challenge.  You will have to write the HTML, CSS and JavaScript files yourself (and link them all together).  Let's just start with building a simple two-player board.  This will be
-rendered via HTML.  There are a few ways you could do it, e.g., a table that
-looks like:
+Puedes empezar creando el tablero de juego donde nuestros usuarios van a competir. Existen muchas formas de hacer esto pero lo mas basico seria hacer algo de este estilo:
 
 ```html
 <table class="racer_table">
@@ -51,7 +36,8 @@ looks like:
 </table>
 ```
 
-Then, using CSS, you can provide styles like:
+Luego CSS, podrias darle unos estilos:
+
 
 ```css
 .racer_table td {
@@ -65,76 +51,49 @@ Then, using CSS, you can provide styles like:
 }
 ```
 
-Updating a player's position could be achieved by adding the `active` class to
-the appropriate `td`.  There are many other ways to achieve a sensible board
-output; this is just one suggestion.
+Para actualizar la posicion del jugador seria suficiente con añadir la clase `active` al `td` apropiado. Existen muchas otras maneras de lograr justo este mismo resultado esta es simplemente una sugerencia.
 
-Make sure you're able to "manually" produce all the board layouts you might
-care about before you jump into the JavaScript.  Whatever way you choose, it
-should be easy for jQuery/JavaScript to manipulate, so keep that in mind.
+Usa [normalize.css][] para evitar estilos cambientes por navegador.
 
-Use something like [normalize.css][] to enable sane default styles.
+### Paso 1: Añade Javascript
 
-### Release 1: Add JavaScript
+Necesitamos una manera en que javascript pueda actualizar el estado del tablero. Crea unas funciones de javascript que actualizen la posicion de algun jugador al ser invocadas. Puedes darle la posicion actual del jugador a la funcion como `input` y esta debe actualizar el HTML para reflejar la nueva posicion.
 
-We need some way for JavaScript to update the board state.  Create simple
-JavaScript functions that can update a particular player's position.  You give
-the functions a player position as input and they update the underlying HTML to
-reflect the new position.
-
-It could look something like:
+se veria algo como esto:
 
 ```javascript
 update_player_position('player1', 10);
 ```
 
-Store this JavaScript in a separate file and use the JavaScript console to
-debug it and pass in values manually.
+No olvides poner este Javscript en un archivo separado, y usa la consola del navegador para debuggear tu aplicacion.
 
-### Release 2: Binding to Key Presses
+### Paso 2: Pega tus funciones a eventos del teclado
 
-Now we'll make the game interactive!  Bind to the [keyup][] event to detect
-when a player has "pressed" a key.  We don't bind to the [keydown][] or
-[keypress][] events because those events fire when the keyboard repeats the
-key, whereas the keyup event doesn't.
+Es hora de hacer el juego interactivo. Use el evento [keyup][] para detectar cuando un jugador a presionado una tecla. Una posible forma de hacer esto seria la siguiente:
 
-It'd be a boring game if you could just hold the key and go.  You want to bind
-to the `document`, like so:
 
 ```javascript
 $(document).ready(function() {
   $(document).on('keyup', function(event) {
-    // Detect which key was pressed and call the appropriate function
-    // Google "jquery keyup what key was pressed" if you don't know how
+    // Detecta que tecla se undio e invoca la funcion adecuada
+    // Googlea 'jquery keyup what key was pressed' si no sabes como hacer esto
   });
 });
 ```
 
-### Release 3: Starting and Winning States
+### Paso 3: Crea los estados de inicio y fin de juego
 
-The last bit is to have starting and winning states, so we can restart the game
-and declare a winner when the game is over.  Add these features (starting,
-playing, winning, and restarting) and submit your solution as a pull request
-with at least three files: an HTML file, a CSS file, and a JavaScript file.
-You can have more files, but all CSS and JavaScript should be linked externally
-from the HTML file.
+El ultimo paso es crear un estado de juego de `inicio` y `fin`, de forma que podamos reiniciar el juego y declarar un ganador cada vez que este termine.
 
-<!-- ## Optimize Your Learning -->
+Añade un boton que de `reiniciar` el cual solo se puede presicionar cuando exista un ganador. Al undir este boton el juego deve revertir a su estado de `inicio`
 
+## Recursos
 
-## Resources
-
-* [Ruby Racer][]
 * [jQuery][]
 * [normalize.css][]
-* [Moxilla documentation for: keyup][keyup]
-* [Moxilla documentation for: keydown][keydown]
-* [Moxilla documentation for: keypress][keypress]
+* [Documentacion para: keyup][keyup]
 
 
-[Ruby Racer]: ../../../ruby-racer-1-outrageous-fortune-challenge
 [jQuery]: http://learn.jquery.com/about-jquery/
 [normalize.css]: http://necolas.github.com/normalize.css/
 [keyup]: http://api.jquery.com/keyup/
-[keydown]: http://api.jquery.com/keydown/
-[keypress]: http://api.jquery.com/keypress/
