@@ -17,7 +17,11 @@ var racer2 = track2.children;
 var i_1 = 0
 var i_2 = 0
 var number = document.querySelector("#counter");
+
 function move(e) {
+  if (racer1[21].className === 'active' || racer2[21].className === 'active' ) {
+    return
+  }
   if (number.innerHTML === "0") {
 
     if (e.keyCode === 80) {
@@ -34,13 +38,38 @@ function move(e) {
   }
 }
 
+function callOnlyOnce(callback) {
+  var call = 0
+
+  return function() {
+    if (call < 1) {
+      call += 1
+      return callback()
+    } else {
+      console.log('ganador ya alertado')
+    }
+  }
+}
+
+function alertPlaye1wins(text) {
+  alert("racer 1 Wins")
+}
+
+function alertPlaye2wins(text) {
+  alert("racer 2 Wins")
+}
+
+var alertOne = callOnlyOnce(alertPlaye1wins)
+var alertTwo = callOnlyOnce(alertPlaye2wins)
+
 var finish = function() {
-  if (racer1[20].className == 'active') {
-    alert("racer 1 Wins");
+
+  if (racer1[21].className == 'active') {
+    alertOne()
   }
 
-  else if (racer2[20].className == 'active') {
-    alert("racer 2 Wins");
+  else if (racer2[21].className == 'active') {
+    alertTwo()
   }
 }
 
