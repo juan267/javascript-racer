@@ -1,3 +1,8 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+////////// Procedural
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 populateTrack(document.getElementById("player1_strip"));
 populateTrack(document.getElementById("player2_strip"));
 
@@ -92,5 +97,3 @@ var countdown = function() {
 window.addEventListener("keyup", move)
 document.querySelector("input").addEventListener("click", reload)
 countdown()
-
-
